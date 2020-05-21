@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[4]:
-
 
 import numpy as np
 import pandas as pd     #(version 1.0.0)
@@ -20,9 +15,9 @@ import folium
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/font-awesome.min.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+dash_app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-server = app.server
+app = dash_app.server
 
 #Overwrite your CSS setting by including style locally
 colors = {
@@ -85,7 +80,7 @@ country_dff = country_df.groupby('country', as_index=False)[['confirmed','deaths
 sorted_country_dff = country_dff.sort_values('confirmed',ascending=False)
 
 #---------------------------------------------------------------
-app.layout = html.Div([
+dash_app.layout = html.Div([
 
 
         # Header display
@@ -350,7 +345,7 @@ location_map.save('abc.html')
 #------------------------------------------------------------------
 #dummy function to invoke table sorting
 #
-# @app.callback(
+# @dash_app.callback(
 #         Output('dummy_table','children'),
 #     [Input('datatable_id','data_timestamp')]
 #
@@ -359,7 +354,7 @@ location_map.save('abc.html')
 def dummy_fx(timestamp):
     pass
 
-@app.callback(
+@dash_app.callback(
     [
         Output('scatterPlot', 'figure'),
         Output('lineChart', 'figure')
@@ -367,8 +362,6 @@ def dummy_fx(timestamp):
     [Input('datatable_id', 'selected_rows'),
      #Input('piedropdown', 'value'),
      Input('radioButton', 'value')]
-
-
 )
 
 
@@ -510,19 +503,5 @@ def update_data(chosen_rows,radioVal):
 
 
 if __name__ == '__main__':
-    app.run_server()
+    dash_app.run_server()
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
