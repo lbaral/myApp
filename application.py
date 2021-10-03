@@ -69,6 +69,20 @@ recovered_df = recovered_df.rename(columns={'province/state': 'state', 'country/
 death_df = death_df.rename(columns={'province/state': 'state', 'country/region': 'country'})
 country_df = country_df.rename(columns={'country_region': 'country'})
 #print(country_df.head(5))
+#drop na
+confirmed_df=confirmed_df.dropna(subset=['long'])
+
+confirmed_df=confirmed_df.dropna(subset=['lat'])
+
+death_df=death_df.dropna(subset=['long'])
+
+death_df=death_df.dropna(subset=['lat'])
+
+recovered_df=recovered_df.dropna(subset=['long'])
+
+recovered_df=recovered_df.dropna(subset=['lat'])
+
+#country_df= country_df.dropna(subset=['recovered'])
 
 # total number of confirmed, death and recovered cases
 confirmed_total = int(country_df['confirmed'].sum())
